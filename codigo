@@ -1,0 +1,45 @@
+`import pyautogui as pa
+import time 
+
+# Obtém o tamanho da tela
+print("Tamanho da tela:", pa.size())
+
+# Define as coordenadas x e y (exemplo)
+x, y = 100, 100  # Altere para as coordenadas desejadas
+
+# Verifica se as coordenadas estão dentro da tela
+print(f"As coordenadas ({x}, {y}) estão na tela:", pa.onScreen(x, y))
+
+# Inicializa o contador de mensagens
+contador = 0
+# Define quantas vezes a mensagem será enviada em cada ciclo
+mensagens_por_ciclo = 5
+
+# Loop principal para enviar mensagens
+while contador < 10:  # Define que o loop deve rodar até 10 ciclos
+    for _ in range(mensagens_por_ciclo):  # Envia a mensagem várias vezes
+        # Funções para cliques do mouse (repetidas dentro do loop)
+        time.sleep(5)
+        pa.click(x=734, y=740)
+        time.sleep(2)
+        pa.click(x=362, y=30)
+        time.sleep(2)
+        pa.click(x=272, y=358)
+        time.sleep(1)
+        pa.click(x=659, y=680)  # Clica no campo de mensagem
+
+        # Digita a mensagem com tratamento de erros
+        try:
+            mensagem = "salve jorge"  # Substitua pela sua mensagem
+            pa.typewrite(mensagem)
+            pa.hotkey('enter')  # Envia a mensagem
+            contador += 1  # Incrementa o contador somente se a mensagem for enviada
+            if contador >= 10:  # Verifica se atingiu o limite total
+                break
+        except Exception as e:
+            print(f"Erro ao digitar ou enviar a mensagem: {e}")
+            time.sleep(1)
+
+        # Aguarda 1 segundo entre as mensagens
+        time.sleep(1)
+    break`
